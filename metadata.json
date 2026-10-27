@@ -1,0 +1,6 @@
+{
+  "name": "J-Market — Plateforme SaaS Multi-Entreprises & Commerce",
+  "description": "Plateforme SaaS tout-en-un pour l'administration générale, la gestion commerciale, stocks, caisse, boutiques en ligne et espace client dédié.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
