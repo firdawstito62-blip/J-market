@@ -88,23 +88,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 Alimentations, boutiques, supérettes, restaurants et fast-foods : encaissez vos ventes au comptoir, pilotez vos stocks, contrôlez votre caisse et activez votre propre boutique en ligne avec livraison à domicile.
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <button
                   onClick={() => onOpenAuth('register_company')}
-                  className="px-6 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-sm rounded-xl transition-all shadow-md flex items-center gap-2"
+                  className="w-full sm:w-auto min-h-[48px] px-6 py-3.5 bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-semibold text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
                 >
                   <span>Créer mon compte professionnel</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={onExploreMarketplace}
-                  className="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-sm rounded-xl transition-colors border border-slate-200"
+                  className="w-full sm:w-auto min-h-[48px] px-5 py-3.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-800 font-semibold text-sm rounded-xl transition-colors border border-slate-200 flex items-center justify-center"
                 >
                   Découvrir les boutiques
                 </button>
                 <button
                   onClick={() => onOpenAuth('login')}
-                  className="px-4 py-3.5 text-slate-600 hover:text-slate-900 font-medium text-sm transition-colors"
+                  className="w-full sm:w-auto min-h-[44px] px-4 py-2.5 text-slate-600 hover:text-slate-900 active:bg-slate-100 font-medium text-sm transition-colors rounded-xl flex items-center justify-center"
                 >
                   Se connecter
                 </button>

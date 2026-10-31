@@ -205,33 +205,33 @@ export const SuperAdminDashboard: React.FC = () => {
       {/* Main Admin Nav */}
       <div className="border-b border-slate-800 bg-slate-900/90 sticky top-16 z-20 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-1 overflow-x-auto py-2 text-xs font-medium">
+          <div className="flex items-center gap-1.5 overflow-x-auto py-2.5 text-xs font-medium no-scrollbar">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center ${
                 activeTab === 'overview'
                   ? 'bg-slate-800 text-white font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-400 hover:text-slate-200 active:bg-slate-800/50'
               }`}
             >
               Tableau de bord global
             </button>
             <button
               onClick={() => setActiveTab('companies')}
-              className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center ${
                 activeTab === 'companies'
                   ? 'bg-slate-800 text-white font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-400 hover:text-slate-200 active:bg-slate-800/50'
               }`}
             >
               Entreprises ({companies.length})
             </button>
             <button
               onClick={() => setActiveTab('pending')}
-              className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                 activeTab === 'pending'
                   ? 'bg-slate-800 text-white font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-400 hover:text-slate-200 active:bg-slate-800/50'
               }`}
             >
               <span>Demandes en attente</span>
@@ -243,40 +243,40 @@ export const SuperAdminDashboard: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('plans')}
-              className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center ${
                 activeTab === 'plans'
                   ? 'bg-slate-800 text-white font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-400 hover:text-slate-200 active:bg-slate-800/50'
               }`}
             >
               Formules & Tarifs
             </button>
             <button
               onClick={() => setActiveTab('subscriptions')}
-              className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center ${
                 activeTab === 'subscriptions'
                   ? 'bg-slate-800 text-white font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-400 hover:text-slate-200 active:bg-slate-800/50'
               }`}
             >
               Suivi Abonnements & Impayés
             </button>
             <button
               onClick={() => setActiveTab('audit')}
-              className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center ${
                 activeTab === 'audit'
                   ? 'bg-slate-800 text-white font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-400 hover:text-slate-200 active:bg-slate-800/50'
               }`}
             >
               Journaux d’Audit & Sécurité
             </button>
             <button
               onClick={() => setActiveTab('settings')}
-              className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center ${
                 activeTab === 'settings'
                   ? 'bg-slate-800 text-white font-semibold'
-                  : 'text-slate-400 hover:text-slate-200'
+                  : 'text-slate-400 hover:text-slate-200 active:bg-slate-800/50'
               }`}
             >
               Paramètres Généraux

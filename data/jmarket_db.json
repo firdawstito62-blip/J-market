@@ -13,6 +13,18 @@
       "lastLoginAt": "2026-10-27T09:18:04.854Z"
     },
     {
+      "id": "usr_super_admin_firdaws",
+      "email": "firdawstito62@gmail.com",
+      "passwordHash": "acbacb1dd04bfd75b21d744bcaa3101e5fa86e423d898d8630769c60e83e56de7744b67a5a0211a9b15c12ca924b0bb69b527d7f4eecd837e47ee0c57420017f",
+      "salt": "84f1534e0bf5090f276bbe46b575c5fa",
+      "fullName": "Firdaws Administrateur",
+      "phone": "+221 78 000 00 00",
+      "role": "super_admin",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "lastLoginAt": "2026-10-31T09:45:00.000Z"
+    },
+    {
       "id": "usr_admin_epicerie",
       "email": "dakar@jmarket.africa",
       "passwordHash": "ffdc7f137c3fc7021a8aa1f239b5b459925c61c944737540f333d7b65cd3556d9094289fcaf30f8dedf2853b50179070850999703eb9f5104d758596cdccb061",

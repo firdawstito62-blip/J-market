@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext.tsx';
 import { Navbar } from './components/layout/Navbar.tsx';
+import { MobileTabBar } from './components/layout/MobileTabBar.tsx';
 import { Footer } from './components/layout/Footer.tsx';
 import { LandingPage } from './components/landing/LandingPage.tsx';
 import { MarketplaceView } from './components/marketplace/MarketplaceView.tsx';
@@ -61,22 +62,22 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 pb-16 md:pb-0">
       {/* Quick Demo Switcher Bar for fast evaluation */}
-      <div className="bg-slate-900 text-slate-300 text-[11px] px-4 py-1.5 border-b border-slate-800">
+      <div className="bg-slate-900 text-slate-300 text-[11px] px-3 sm:px-4 py-1.5 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-1.5">
-            <span className="font-semibold text-white">J-Market SaaS :</span>
-            <span className="hidden sm:inline text-slate-400">Changer de rôle pour tester les 3 espaces :</span>
+            <span className="font-semibold text-white">J-Market :</span>
+            <span className="hidden sm:inline text-slate-400">Rôle de test :</span>
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto">
+          <div className="flex items-center gap-1.5 overflow-x-auto py-0.5 no-scrollbar max-w-full">
             <button
               onClick={async () => {
                 await quickLoginAs('super_admin');
                 setCurrentView('super_admin');
               }}
-              className="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-medium transition-colors"
+              className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[10px] sm:text-[11px] font-medium transition-colors whitespace-nowrap shrink-0 min-h-[32px] flex items-center"
             >
               1. Super Admin
             </button>
@@ -85,25 +86,25 @@ function AppContent() {
                 await quickLoginAs('epicerie');
                 setCurrentView('company');
               }}
-              className="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-medium transition-colors"
+              className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[10px] sm:text-[11px] font-medium transition-colors whitespace-nowrap shrink-0 min-h-[32px] flex items-center"
             >
-              2. Épicerie Dakar (Alimentation)
+              2. Épicerie (Alimentation)
             </button>
             <button
               onClick={async () => {
                 await quickLoginAs('grille');
                 setCurrentView('company');
               }}
-              className="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-medium transition-colors"
+              className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[10px] sm:text-[11px] font-medium transition-colors whitespace-nowrap shrink-0 min-h-[32px] flex items-center"
             >
-              3. Afro-Grille (Restaurant)
+              3. Afro-Grille (Resto)
             </button>
             <button
               onClick={async () => {
                 await quickLoginAs('client');
                 setCurrentView('client');
               }}
-              className="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-medium transition-colors"
+              className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[10px] sm:text-[11px] font-medium transition-colors whitespace-nowrap shrink-0 min-h-[32px] flex items-center"
             >
               4. Client Final
             </button>
@@ -175,6 +176,13 @@ function AppContent() {
       {currentView !== 'super_admin' && (
         <Footer onNavigate={handleNavigate} onOpenAuth={handleOpenAuth} />
       )}
+
+      {/* Fixed Ergonomic Mobile Tab Bar */}
+      <MobileTabBar
+        currentView={currentView}
+        onNavigate={handleNavigate}
+        onOpenAuth={handleOpenAuth}
+      />
 
       {/* Auth Modal */}
       <AuthModal

@@ -379,21 +379,21 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
   });
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pb-20">
+    <div className="min-h-screen bg-slate-50 text-slate-800 pb-28 md:pb-20">
       {/* Top Banner with Company Info */}
       <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div>
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-emerald-700 flex items-center justify-center text-white font-bold text-sm">
+                <div className="w-8 h-8 rounded-lg bg-emerald-700 flex items-center justify-center text-white font-bold text-sm shrink-0">
                   {company?.name.charAt(0) || 'B'}
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold tracking-tight text-slate-900">
+                  <h1 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 line-clamp-1">
                     {company?.name}
                   </h1>
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-slate-500 mt-0.5">
                     <span className="capitalize">{company?.activityType}</span>
                     <span>·</span>
                     <span>{company?.city}, {company?.country}</span>
@@ -406,22 +406,22 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
               {company?.onlineStoreConfig?.enabled && (
                 <button
                   onClick={() => onOpenStorefront && onOpenStorefront(company.slug)}
-                  className="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors border border-emerald-200"
+                  className="min-h-[40px] px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors border border-emerald-200"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
-                  <span>Voir ma boutique en ligne</span>
+                  <span>Boutique en ligne</span>
                 </button>
               )}
 
               {/* Cash Register State */}
               {activeRegister ? (
-                <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs">
-                  <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
-                  <span className="font-semibold text-emerald-800">
+                <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs min-h-[40px]">
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0"></span>
+                  <span className="font-semibold text-emerald-800 text-[11px] sm:text-xs">
                     Caisse ouverte ({formatFCFA(activeRegister.systemCalculatedBalanceXof)})
                   </span>
                   <button
@@ -429,7 +429,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                       setCountedCashAmount(activeRegister.systemCalculatedBalanceXof);
                       setCloseRegisterModal(true);
                     }}
-                    className="text-[11px] underline text-emerald-900 hover:text-emerald-700 ml-1"
+                    className="text-[11px] underline text-emerald-900 hover:text-emerald-700 ml-1 p-1"
                   >
                     Clôturer
                   </button>
@@ -437,7 +437,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
               ) : (
                 <button
                   onClick={() => setOpenRegisterModal(true)}
-                  className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5"
+                  className="min-h-[40px] px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5"
                 >
                   <Wallet className="w-3.5 h-3.5" />
                   <span>Ouvrir la caisse</span>
@@ -447,13 +447,13 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
           </div>
         </div>
 
-        {/* Secondary Subnav */}
-        <div className="border-t border-slate-100 bg-slate-50/70">
+        {/* Secondary Subnav (Horizontal scroll with smooth touch) */}
+        <div className="border-t border-slate-100 bg-slate-50/70 overflow-x-auto no-scrollbar">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-1 overflow-x-auto py-2 text-xs font-medium text-slate-600">
+            <div className="flex items-center gap-1.5 py-2 text-xs font-medium text-slate-600 min-w-max">
               <button
                 onClick={() => setActiveTab('overview')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'overview' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
@@ -463,7 +463,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
 
               <button
                 onClick={() => setActiveTab('pos')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'pos' ? 'bg-emerald-700 text-white font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
@@ -473,7 +473,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
 
               <button
                 onClick={() => setActiveTab('products')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'products' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
@@ -483,7 +483,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
 
               <button
                 onClick={() => setActiveTab('stock')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'stock' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
@@ -498,7 +498,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
 
               <button
                 onClick={() => setActiveTab('orders')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'orders' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
@@ -513,7 +513,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
 
               <button
                 onClick={() => setActiveTab('online_store')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'online_store' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
@@ -523,7 +523,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
 
               <button
                 onClick={() => setActiveTab('team')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'team' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
@@ -533,70 +533,70 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
 
               <button
                 onClick={() => setActiveTab('cash')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'cash' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
                 <Wallet className="w-3.5 h-3.5" />
-                <span>Trésorerie Caisse</span>
+                <span>Trésorerie</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('suppliers')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'suppliers' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
                 <Truck className="w-3.5 h-3.5" />
-                <span>Fournisseurs & Achats</span>
+                <span>Fournisseurs</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('reports')}
-                className={`px-3 py-1.5 rounded-md transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                   activeTab === 'reports' ? 'bg-white text-slate-900 font-semibold shadow-xs' : 'hover:text-slate-900'
                 }`}
               >
                 <TrendingUp className="w-3.5 h-3.5" />
-                <span>Rapports & Marge</span>
+                <span>Rapports</span>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5 sm:mt-6">
         {/* 1. OVERVIEW DASHBOARD */}
         {activeTab === 'overview' && dashboardData && (
           <div className="space-y-6">
-            {/* KPI Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-4 rounded-xl bg-white border border-slate-200">
-                <span className="text-xs text-slate-500">Ventes du jour</span>
-                <div className="text-2xl font-bold font-mono tabular-nums text-slate-900 mt-1">
+            {/* KPI Cards (2x2 on mobile, 4 on desktop) */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200">
+                <span className="text-[11px] sm:text-xs text-slate-500">Ventes du jour</span>
+                <div className="text-lg sm:text-2xl font-bold font-mono tabular-nums text-slate-900 mt-1">
                   {formatFCFA(dashboardData.metrics.todaySalesXof)}
                 </div>
-                <span className="text-[11px] text-slate-500 mt-1 block">
-                  {dashboardData.metrics.todayOrdersCount} vente(s) aujourd’hui
+                <span className="text-[10px] sm:text-[11px] text-slate-500 mt-1 block">
+                  {dashboardData.metrics.todayOrdersCount} vente(s)
                 </span>
               </div>
 
-              <div className="p-4 rounded-xl bg-white border border-slate-200">
-                <span className="text-xs text-slate-500">Chiffre d’affaires cumulé</span>
-                <div className="text-2xl font-bold font-mono tabular-nums text-emerald-700 mt-1">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200">
+                <span className="text-[11px] sm:text-xs text-slate-500">CA Cumulé</span>
+                <div className="text-lg sm:text-2xl font-bold font-mono tabular-nums text-emerald-700 mt-1">
                   {formatFCFA(dashboardData.metrics.totalSalesXof)}
                 </div>
-                <span className="text-[11px] text-slate-500 mt-1 block">
-                  {dashboardData.metrics.totalOrdersCount} commandes totales
+                <span className="text-[10px] sm:text-[11px] text-slate-500 mt-1 block">
+                  {dashboardData.metrics.totalOrdersCount} commandes
                 </span>
               </div>
 
-              <div className="p-4 rounded-xl bg-white border border-slate-200">
-                <span className="text-xs text-slate-500">Articles en stock</span>
-                <div className="text-2xl font-bold font-mono tabular-nums text-slate-900 mt-1">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200">
+                <span className="text-[11px] sm:text-xs text-slate-500">Articles en stock</span>
+                <div className="text-lg sm:text-2xl font-bold font-mono tabular-nums text-slate-900 mt-1">
                   {dashboardData.metrics.totalProductsCount}
                 </div>
-                <div className="text-[11px] text-slate-500 mt-1">
+                <div className="text-[10px] sm:text-[11px] text-slate-500 mt-1">
                   {dashboardData.metrics.lowStockCount > 0 ? (
                     <span className="text-rose-600 font-semibold">
                       {dashboardData.metrics.lowStockCount} alerte(s) rupture
@@ -607,13 +607,13 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white border border-slate-200">
-                <span className="text-xs text-slate-500">Base Clients</span>
-                <div className="text-2xl font-bold font-mono tabular-nums text-slate-900 mt-1">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200">
+                <span className="text-[11px] sm:text-xs text-slate-500">Base Clients</span>
+                <div className="text-lg sm:text-2xl font-bold font-mono tabular-nums text-slate-900 mt-1">
                   {dashboardData.metrics.totalCustomersCount}
                 </div>
-                <span className="text-[11px] text-slate-500 mt-1 block">
-                  Clients comptoir & en ligne
+                <span className="text-[10px] sm:text-[11px] text-slate-500 mt-1 block">
+                  Comptoir & web
                 </span>
               </div>
             </div>
@@ -628,16 +628,17 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
               </div>
               <button
                 onClick={() => setActiveTab('pos')}
-                className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-sm"
+                className="w-full sm:w-auto min-h-[44px] px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs rounded-xl transition-colors whitespace-nowrap shrink-0 shadow-sm flex items-center justify-center gap-2"
               >
-                Ouvrir la Caisse Tactile
+                <ShoppingCart className="w-4 h-4" />
+                <span>Ouvrir la Caisse Tactile</span>
               </button>
             </div>
 
             {/* Low stock alerts & recent orders split */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               {/* Low stock items */}
-              <div className="p-5 rounded-xl bg-white border border-slate-200">
+              <div className="p-4 sm:p-5 rounded-xl bg-white border border-slate-200">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                   <div className="flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4 text-amber-500" />
@@ -647,7 +648,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                   </div>
                   <button
                     onClick={() => setActiveTab('stock')}
-                    className="text-xs text-emerald-700 hover:underline"
+                    className="min-h-[40px] px-2 text-xs text-emerald-700 hover:underline flex items-center"
                   >
                     Gérer les stocks
                   </button>
@@ -660,16 +661,16 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                 ) : (
                   <div className="divide-y divide-slate-100 mt-2">
                     {dashboardData.lowStockAlerts?.map((prod: Product) => (
-                      <div key={prod.id} className="py-2.5 flex items-center justify-between text-xs">
+                      <div key={prod.id} className="py-2.5 flex items-center justify-between text-xs gap-2">
                         <div>
-                          <span className="font-semibold text-slate-800">{prod.name}</span>
+                          <span className="font-semibold text-slate-800 line-clamp-1">{prod.name}</span>
                           <span className="text-[11px] text-slate-500 block">
-                            SKU: {prod.sku} · Seuil d’alerte: {prod.minStockAlert} {prod.unit}
+                            SKU: {prod.sku} · Seuil: {prod.minStockAlert} {prod.unit}
                           </span>
                         </div>
-                        <div className="text-right">
-                          <span className="font-mono font-bold text-rose-600 block">
-                            {prod.currentStock} {prod.unit} restant(s)
+                        <div className="text-right shrink-0">
+                          <span className="font-mono font-bold text-rose-600 block text-xs">
+                            {prod.currentStock} {prod.unit}
                           </span>
                           <button
                             onClick={() => {
@@ -678,7 +679,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                               setStockAdjQty(10);
                               setStockModalOpen(true);
                             }}
-                            className="text-[11px] text-emerald-700 hover:underline"
+                            className="min-h-[36px] text-[11px] text-emerald-700 hover:underline font-medium inline-flex items-center"
                           >
                             Réapprovisionner
                           </button>
@@ -690,14 +691,14 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
               </div>
 
               {/* Recent Orders */}
-              <div className="p-5 rounded-xl bg-white border border-slate-200">
+              <div className="p-4 sm:p-5 rounded-xl bg-white border border-slate-200">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                   <h3 className="text-sm font-semibold text-slate-900">
-                    Dernières Ventes & Commandes
+                    Dernières Ventes
                   </h3>
                   <button
                     onClick={() => setActiveTab('orders')}
-                    className="text-xs text-emerald-700 hover:underline"
+                    className="min-h-[40px] px-2 text-xs text-emerald-700 hover:underline flex items-center"
                   >
                     Voir tout ({orders.length})
                   </button>
@@ -705,22 +706,22 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
 
                 <div className="divide-y divide-slate-100 mt-2">
                   {dashboardData.recentOrders?.map((ord: Order) => (
-                    <div key={ord.id} className="py-2.5 flex items-center justify-between text-xs">
+                    <div key={ord.id} className="py-2.5 flex items-center justify-between text-xs gap-2">
                       <div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5 flex-wrap">
                           <span className="font-semibold text-slate-900">#{ord.orderNumber}</span>
                           <span className="text-slate-400">·</span>
-                          <span className="text-slate-600">{ord.customerName}</span>
-                          <span className="text-[10px] uppercase font-mono text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                          <span className="text-slate-700 truncate max-w-[120px]">{ord.customerName}</span>
+                          <span className="text-[9px] uppercase font-mono text-slate-500 bg-slate-100 px-1 py-0.5 rounded">
                             {ord.channel === 'pos' ? 'Comptoir' : 'En ligne'}
                           </span>
                         </div>
                         <span className="text-[11px] text-slate-500 block mt-0.5">
-                          {formatDateFr(ord.createdAt)} · {ord.items.length} article(s)
+                          {formatDateShort(ord.createdAt)} · {ord.items.length} art.
                         </span>
                       </div>
-                      <div className="text-right">
-                        <span className="font-mono font-bold text-slate-900 block">
+                      <div className="text-right shrink-0">
+                        <span className="font-mono font-bold text-slate-900 block text-xs">
                           {formatFCFA(ord.totalXof)}
                         </span>
                         <span
@@ -743,28 +744,28 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
           </div>
         )}
 
-        {/* 2. POS CAISSE TACTILE */}
+        {/* 2. POS CAISSE TACTILE (Optimized for Mobile and Tablet Touch) */}
         {activeTab === 'pos' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {/* Left 2 Cols: Catalog Grid */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-3 sm:space-y-4">
               {/* POS Search & Category Filter */}
-              <div className="flex flex-col sm:flex-row items-center gap-3 bg-white p-3 rounded-xl border border-slate-200">
+              <div className="flex flex-col sm:flex-row items-center gap-2.5 bg-white p-3 rounded-xl border border-slate-200">
                 <div className="relative flex-1 w-full">
-                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
                   <input
                     type="text"
                     placeholder="Scanner code-barre ou chercher un article..."
                     value={posSearch}
                     onChange={(e) => setPosSearch(e.target.value)}
-                    className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+                    className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600 min-h-[42px]"
                   />
                 </div>
 
-                <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
+                <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto no-scrollbar py-1">
                   <button
                     onClick={() => setPosCategoryFilter('all')}
-                    className={`px-3 py-1.5 text-xs rounded-lg whitespace-nowrap shrink-0 transition-colors ${
+                    className={`min-h-[38px] px-3.5 py-1.5 text-xs rounded-lg whitespace-nowrap shrink-0 transition-colors ${
                       posCategoryFilter === 'all'
                         ? 'bg-slate-900 text-white font-semibold'
                         : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -776,7 +777,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                     <button
                       key={c.id}
                       onClick={() => setPosCategoryFilter(c.id)}
-                      className={`px-3 py-1.5 text-xs rounded-lg whitespace-nowrap shrink-0 transition-colors ${
+                      className={`min-h-[38px] px-3.5 py-1.5 text-xs rounded-lg whitespace-nowrap shrink-0 transition-colors ${
                         posCategoryFilter === c.id
                           ? 'bg-slate-900 text-white font-semibold'
                           : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -788,8 +789,8 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                 </div>
               </div>
 
-              {/* Products Touch Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {/* Products Touch Grid: 2 columns on mobile, 3 on tablet/desktop */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                 {filteredPosProducts.map((p) => {
                   const inCartItem = posCart.find((i) => i.product.id === p.id);
                   const isOutOfStock = p.currentStock <= 0;
@@ -799,40 +800,40 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                       key={p.id}
                       disabled={isOutOfStock}
                       onClick={() => addToPosCart(p)}
-                      className={`p-3 rounded-xl border text-left transition-all relative flex flex-col justify-between h-36 ${
+                      className={`p-3 rounded-xl border text-left transition-all relative flex flex-col justify-between min-h-[140px] select-none active:scale-[0.98] ${
                         isOutOfStock
                           ? 'bg-slate-100 border-slate-200 opacity-60 cursor-not-allowed'
                           : inCartItem
-                          ? 'bg-emerald-50/60 border-emerald-400 shadow-xs'
+                          ? 'bg-emerald-50/70 border-emerald-500 shadow-xs ring-1 ring-emerald-500'
                           : 'bg-white border-slate-200 hover:border-emerald-500 hover:shadow-xs'
                       }`}
                     >
                       <div>
                         <div className="flex items-start justify-between gap-1">
-                          <h4 className="font-semibold text-xs text-slate-900 line-clamp-2">
+                          <h4 className="font-semibold text-xs text-slate-900 line-clamp-2 leading-snug">
                             {p.name}
                           </h4>
                           {inCartItem && (
-                            <span className="font-mono text-xs font-bold text-emerald-800 bg-emerald-200 px-1.5 py-0.5 rounded">
+                            <span className="font-mono text-xs font-bold text-emerald-800 bg-emerald-200 px-1.5 py-0.5 rounded shrink-0">
                               x{inCartItem.quantity}
                             </span>
                           )}
                         </div>
-                        <span className="text-[10px] text-slate-500 block mt-1">
-                          Réf: {p.sku}
+                        <span className="text-[10px] text-slate-500 block mt-0.5 font-mono">
+                          {p.sku}
                         </span>
                       </div>
 
                       <div className="mt-2 pt-2 border-t border-slate-100 flex items-end justify-between">
                         <div>
-                          <span className="font-mono text-sm font-bold text-slate-900 block">
+                          <span className="font-mono text-xs sm:text-sm font-bold text-slate-900 block">
                             {formatFCFA(p.priceXof)}
                           </span>
                           <span className="text-[10px] text-slate-500">
-                            Stock: {p.currentStock} {p.unit}
+                            Dispo: {p.currentStock} {p.unit}
                           </span>
                         </div>
-                        <span className="w-6 h-6 rounded-md bg-emerald-700 text-white flex items-center justify-center text-xs font-bold shadow-xs">
+                        <span className="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-sm font-bold shadow-xs">
                           +
                         </span>
                       </div>
@@ -842,20 +843,20 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
               </div>
             </div>
 
-            {/* Right Col: POS Current Ticket / Cart */}
-            <div className="p-4 rounded-xl bg-white border border-slate-200 flex flex-col justify-between h-full min-h-[500px]">
+            {/* Right Col: POS Current Ticket / Cart (Desktop sticky or mobile visible) */}
+            <div className="p-4 rounded-xl bg-white border border-slate-200 flex flex-col justify-between h-full min-h-[460px] shadow-sm">
               <div>
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200">
                   <div className="flex items-center gap-2">
                     <ShoppingCart className="w-4 h-4 text-emerald-700" />
-                    <h3 className="font-bold text-sm text-slate-900">Ticket de Vente Caisse</h3>
+                    <h3 className="font-bold text-sm text-slate-900">Ticket de Vente ({posCart.length})</h3>
                   </div>
                   {posCart.length > 0 && (
                     <button
                       onClick={() => setPosCart([])}
-                      className="text-xs text-rose-600 hover:underline"
+                      className="min-h-[36px] px-2 text-xs text-rose-600 hover:underline flex items-center font-medium"
                     >
-                      Vider le panier
+                      Vider
                     </button>
                   )}
                 </div>
@@ -867,44 +868,46 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                     placeholder="Nom client ou table (optionnel)"
                     value={posCustomerName}
                     onChange={(e) => setPosCustomerName(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-600 min-h-[40px]"
                   />
                 </div>
 
                 {/* Cart Items List */}
-                <div className="divide-y divide-slate-100 mt-3 max-h-72 overflow-y-auto">
+                <div className="divide-y divide-slate-100 mt-3 max-h-64 sm:max-h-72 overflow-y-auto">
                   {posCart.length === 0 ? (
                     <div className="py-12 text-center text-slate-400 text-xs">
-                      Panier vide. Cliquez sur un article du catalogue pour l’ajouter au ticket.
+                      Ticket vide. Touchez un article du catalogue pour l’ajouter.
                     </div>
                   ) : (
                     posCart.map((item) => (
-                      <div key={item.product.id} className="py-2.5 flex items-center justify-between text-xs">
-                        <div className="pr-2">
+                      <div key={item.product.id} className="py-2.5 flex items-center justify-between text-xs gap-1">
+                        <div className="pr-1 flex-1">
                           <span className="font-semibold text-slate-800 block line-clamp-1">
                             {item.product.name}
                           </span>
                           <span className="font-mono text-slate-500 text-[11px]">
-                            {formatFCFA(item.product.priceXof)} x {item.quantity}
+                            {formatFCFA(item.product.priceXof)}
                           </span>
                         </div>
                         <div className="flex items-center gap-1.5 shrink-0">
                           <button
                             onClick={() => updateCartQty(item.product.id, item.quantity - 1)}
-                            className="w-5 h-5 bg-slate-100 hover:bg-slate-200 rounded flex items-center justify-center font-bold text-xs"
+                            className="min-h-[36px] min-w-[36px] bg-slate-100 active:bg-slate-200 rounded-lg flex items-center justify-center font-bold text-sm"
+                            aria-label="Diminuer quantité"
                           >
                             -
                           </button>
-                          <span className="font-mono text-xs w-4 text-center font-semibold">
+                          <span className="font-mono text-xs w-5 text-center font-bold">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => updateCartQty(item.product.id, item.quantity + 1)}
-                            className="w-5 h-5 bg-slate-100 hover:bg-slate-200 rounded flex items-center justify-center font-bold text-xs"
+                            className="min-h-[36px] min-w-[36px] bg-slate-100 active:bg-slate-200 rounded-lg flex items-center justify-center font-bold text-sm"
+                            aria-label="Augmenter quantité"
                           >
                             +
                           </button>
-                          <span className="font-mono font-bold text-slate-900 ml-2 w-16 text-right">
+                          <span className="font-mono font-bold text-slate-900 ml-1.5 w-16 text-right text-xs">
                             {formatFCFA(item.product.priceXof * item.quantity)}
                           </span>
                         </div>
@@ -915,15 +918,15 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
               </div>
 
               {/* Total & Checkout */}
-              <div className="pt-4 border-t border-slate-200 mt-4 space-y-3">
+              <div className="pt-3 border-t border-slate-200 mt-3 space-y-3">
                 <div className="flex items-center justify-between text-base font-bold text-slate-900">
-                  <span>Total à Payer :</span>
+                  <span>Total :</span>
                   <span className="font-mono tabular-nums text-emerald-800 text-xl">
                     {formatFCFA(posTotalXof)}
                   </span>
                 </div>
 
-                {/* Payment Method selector */}
+                {/* Payment Method selector with touch targets */}
                 <div>
                   <span className="block text-[11px] font-semibold text-slate-600 mb-1.5">
                     Mode de Règlement :
@@ -932,10 +935,10 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                     <button
                       type="button"
                       onClick={() => setPosPaymentMethod('cod')}
-                      className={`py-1.5 text-xs font-semibold rounded-lg border transition-all ${
+                      className={`min-h-[44px] py-1.5 text-xs font-semibold rounded-lg border transition-all ${
                         posPaymentMethod === 'cod'
                           ? 'bg-slate-900 text-white border-slate-900'
-                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                          : 'bg-slate-50 text-slate-700 border-slate-200 active:bg-slate-100'
                       }`}
                     >
                       Espèces
@@ -943,10 +946,10 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                     <button
                       type="button"
                       onClick={() => setPosPaymentMethod('wave')}
-                      className={`py-1.5 text-xs font-semibold rounded-lg border transition-all ${
+                      className={`min-h-[44px] py-1.5 text-xs font-semibold rounded-lg border transition-all ${
                         posPaymentMethod === 'wave'
                           ? 'bg-sky-600 text-white border-sky-600'
-                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                          : 'bg-slate-50 text-slate-700 border-slate-200 active:bg-slate-100'
                       }`}
                     >
                       Wave
@@ -954,10 +957,10 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                     <button
                       type="button"
                       onClick={() => setPosPaymentMethod('orange_money')}
-                      className={`py-1.5 text-xs font-semibold rounded-lg border transition-all ${
+                      className={`min-h-[44px] py-1.5 text-xs font-semibold rounded-lg border transition-all ${
                         posPaymentMethod === 'orange_money'
                           ? 'bg-amber-600 text-white border-amber-600'
-                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                          : 'bg-slate-50 text-slate-700 border-slate-200 active:bg-slate-100'
                       }`}
                     >
                       Orange Money
@@ -969,7 +972,7 @@ export const CompanyDashboard: React.FC<CompanyDashboardProps> = ({ onOpenStoref
                   type="button"
                   disabled={posCart.length === 0}
                   onClick={handlePosCheckout}
-                  className="w-full py-3 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-50 text-white font-bold text-sm rounded-xl transition-all shadow-sm flex items-center justify-center gap-2"
+                  className="w-full min-h-[48px] py-3 bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 disabled:opacity-50 text-white font-bold text-sm rounded-xl transition-all shadow-sm flex items-center justify-center gap-2"
                 >
                   <DollarSign className="w-4 h-4" />
                   <span>Encaisser {formatFCFA(posTotalXof)}</span>

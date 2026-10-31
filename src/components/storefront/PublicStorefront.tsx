@@ -298,8 +298,8 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
           </div>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+        {/* Product Grid: 2-column on mobile, up to 4-column on desktop */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4 mt-6">
           {filteredProducts.map((p) => {
             const inCart = cart.find((i) => i.product.id === p.id);
             const isOutOfStock = p.currentStock <= 0;
@@ -320,54 +320,54 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-slate-400">
-                        <Store className="w-8 h-8" />
+                        <Store className="w-7 h-7 sm:w-8 sm:h-8" />
                       </div>
                     )}
                     {p.isFeatured && (
-                      <span className="absolute top-2 left-2 bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
+                      <span className="absolute top-2 left-2 bg-emerald-700 text-white text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded shadow-xs">
                         Coup de cœur
                       </span>
                     )}
                   </div>
 
-                  <div className="p-4">
-                    <h3 className="font-semibold text-sm text-slate-900 line-clamp-1">
+                  <div className="p-2.5 sm:p-4">
+                    <h3 className="font-semibold text-xs sm:text-sm text-slate-900 line-clamp-1">
                       {p.name}
                     </h3>
-                    <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                    <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 sm:mt-1 line-clamp-2">
                       {p.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-4 pt-0">
-                  <div className="flex items-baseline justify-between mb-3">
-                    <span className="font-mono text-base font-bold text-slate-900">
+                <div className="p-2.5 sm:p-4 pt-0">
+                  <div className="flex items-baseline justify-between mb-2 sm:mb-3">
+                    <span className="font-mono text-sm sm:text-base font-bold text-slate-900">
                       {formatFCFA(p.priceXof)}
                     </span>
-                    <span className="text-[11px] text-slate-500">
-                      par {p.unit}
+                    <span className="text-[10px] sm:text-[11px] text-slate-500">
+                      /{p.unit}
                     </span>
                   </div>
 
                   <button
                     disabled={isOutOfStock}
                     onClick={() => addToCart(p)}
-                    className={`w-full py-2 px-3 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors ${
+                    className={`w-full min-h-[40px] py-2 px-2.5 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors ${
                       isOutOfStock
                         ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
                         : inCart
                         ? 'bg-emerald-800 text-white hover:bg-emerald-900'
-                        : 'bg-emerald-700 text-white hover:bg-emerald-800 shadow-xs'
+                        : 'bg-emerald-700 text-white hover:bg-emerald-800 shadow-xs active:bg-emerald-900'
                     }`}
                   >
-                    <ShoppingBag className="w-3.5 h-3.5" />
-                    <span>
+                    <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+                    <span className="truncate">
                       {isOutOfStock
-                        ? 'Rupture temporaire'
+                        ? 'Rupture'
                         : inCart
                         ? `Ajouté (${inCart.quantity})`
-                        : 'Ajouter au panier'}
+                        : 'Ajouter'}
                     </span>
                   </button>
                 </div>
@@ -377,10 +377,28 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
         </div>
       </div>
 
+      {/* Floating Bottom Quick-Cart Trigger for Mobile Thumb-zone */}
+      {cart.length > 0 && !cartOpen && (
+        <div className="fixed bottom-20 md:hidden left-4 right-4 z-40 animate-bounce-in">
+          <button
+            onClick={() => setCartOpen(true)}
+            className="w-full min-h-[48px] py-3 px-4 bg-emerald-700 active:bg-emerald-800 text-white font-bold text-xs rounded-2xl shadow-xl flex items-center justify-between border border-emerald-500/30"
+          >
+            <div className="flex items-center gap-2">
+              <ShoppingBag className="w-4 h-4 text-emerald-200" />
+              <span>Voir le panier ({cart.reduce((s, i) => s + i.quantity, 0)} articles)</span>
+            </div>
+            <span className="font-mono text-sm bg-emerald-800/80 px-2 py-0.5 rounded-lg">
+              {formatFCFA(subtotalXof)}
+            </span>
+          </button>
+        </div>
+      )}
+
       {/* SHOPPING CART & CHECKOUT DRAWER */}
       {cartOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/50 backdrop-blur-xs">
-          <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between overflow-y-auto p-6">
+        <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/60 backdrop-blur-xs">
+          <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between overflow-y-auto p-4 sm:p-6">
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-slate-200">
                 <div className="flex items-center gap-2">
@@ -391,7 +409,7 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                 </div>
                 <button
                   onClick={() => setCartOpen(false)}
-                  className="text-slate-400 hover:text-slate-600 p-1"
+                  className="min-h-[40px] min-w-[40px] flex items-center justify-center text-slate-400 hover:text-slate-600 active:bg-slate-100 rounded-lg"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -406,23 +424,23 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                 ) : (
                   cart.map((item) => (
                     <div key={item.product.id} className="py-2.5 flex items-center justify-between text-xs">
-                      <div>
-                        <span className="font-semibold text-slate-900 block">{item.product.name}</span>
+                      <div className="pr-2">
+                        <span className="font-semibold text-slate-900 block line-clamp-1">{item.product.name}</span>
                         <span className="font-mono text-slate-500 text-[11px]">
                           {formatFCFA(item.product.priceXof)} x {item.quantity}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1.5 shrink-0">
+                      <div className="flex items-center gap-2 shrink-0">
                         <button
                           onClick={() => updateCartQty(item.product.id, item.quantity - 1)}
-                          className="w-5 h-5 bg-slate-100 rounded flex items-center justify-center font-bold"
+                          className="min-h-[36px] min-w-[36px] w-9 h-9 bg-slate-100 active:bg-slate-200 rounded-lg flex items-center justify-center font-bold text-slate-700"
                         >
                           -
                         </button>
-                        <span className="font-mono text-xs w-4 text-center">{item.quantity}</span>
+                        <span className="font-mono text-xs w-5 text-center font-bold">{item.quantity}</span>
                         <button
                           onClick={() => updateCartQty(item.product.id, item.quantity + 1)}
-                          className="w-5 h-5 bg-slate-100 rounded flex items-center justify-center font-bold"
+                          className="min-h-[36px] min-w-[36px] w-9 h-9 bg-slate-100 active:bg-slate-200 rounded-lg flex items-center justify-center font-bold text-slate-700"
                         >
                           +
                         </button>
@@ -446,10 +464,10 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                     <button
                       type="button"
                       onClick={() => setDeliveryMethod('delivery')}
-                      className={`p-2 rounded-lg border text-xs font-semibold text-center transition-all ${
+                      className={`min-h-[44px] p-2.5 rounded-lg border text-xs font-semibold text-center transition-all ${
                         deliveryMethod === 'delivery'
-                          ? 'border-emerald-700 bg-emerald-50 text-emerald-900'
-                          : 'border-slate-200 bg-slate-50 text-slate-600'
+                          ? 'border-emerald-700 bg-emerald-50 text-emerald-900 shadow-xs'
+                          : 'border-slate-200 bg-slate-50 text-slate-600 active:bg-slate-100'
                       }`}
                     >
                       Livraison à domicile
@@ -457,10 +475,10 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                     <button
                       type="button"
                       onClick={() => setDeliveryMethod('pickup')}
-                      className={`p-2 rounded-lg border text-xs font-semibold text-center transition-all ${
+                      className={`min-h-[44px] p-2.5 rounded-lg border text-xs font-semibold text-center transition-all ${
                         deliveryMethod === 'pickup'
-                          ? 'border-emerald-700 bg-emerald-50 text-emerald-900'
-                          : 'border-slate-200 bg-slate-50 text-slate-600'
+                          ? 'border-emerald-700 bg-emerald-50 text-emerald-900 shadow-xs'
+                          : 'border-slate-200 bg-slate-50 text-slate-600 active:bg-slate-100'
                       }`}
                     >
                       Retrait en boutique
@@ -478,7 +496,7 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                           const z = store.config.deliveryZones.find((dz: any) => dz.name === e.target.value);
                           if (z) setSelectedZone(z);
                         }}
-                        className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300 bg-white"
+                        className="w-full min-h-[42px] px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white"
                       >
                         {store.config.deliveryZones.map((z: DeliveryZone, idx: number) => (
                           <option key={idx} value={z.name}>
@@ -499,7 +517,7 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                       placeholder="Ex: Awa Diop"
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
-                      className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300"
+                      className="w-full min-h-[42px] px-3 py-2 text-xs rounded-lg border border-slate-300"
                     />
                   </div>
 
@@ -513,7 +531,7 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                       placeholder="+221 77 000 00 00"
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
-                      className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300"
+                      className="w-full min-h-[42px] px-3 py-2 text-xs rounded-lg border border-slate-300"
                     />
                   </div>
 
@@ -528,7 +546,7 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                         placeholder="Quartier, Immeuble, Numéro de rue"
                         value={deliveryAddress}
                         onChange={(e) => setDeliveryAddress(e.target.value)}
-                        className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300"
+                        className="w-full min-h-[42px] px-3 py-2 text-xs rounded-lg border border-slate-300"
                       />
                     </div>
                   )}
@@ -541,10 +559,10 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                       <button
                         type="button"
                         onClick={() => setPaymentMethod('cod')}
-                        className={`p-1.5 text-[11px] font-semibold rounded-lg border ${
+                        className={`min-h-[44px] py-1.5 px-2 text-[11px] font-semibold rounded-lg border transition-all ${
                           paymentMethod === 'cod'
-                            ? 'bg-slate-900 text-white'
-                            : 'bg-slate-50 text-slate-700 border-slate-200'
+                            ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 active:bg-slate-100'
                         }`}
                       >
                         À la livraison
@@ -552,10 +570,10 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                       <button
                         type="button"
                         onClick={() => setPaymentMethod('wave')}
-                        className={`p-1.5 text-[11px] font-semibold rounded-lg border ${
+                        className={`min-h-[44px] py-1.5 px-2 text-[11px] font-semibold rounded-lg border transition-all ${
                           paymentMethod === 'wave'
-                            ? 'bg-sky-600 text-white'
-                            : 'bg-slate-50 text-slate-700 border-slate-200'
+                            ? 'bg-sky-600 text-white border-sky-600 shadow-xs'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 active:bg-slate-100'
                         }`}
                       >
                         Wave
@@ -563,10 +581,10 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                       <button
                         type="button"
                         onClick={() => setPaymentMethod('orange_money')}
-                        className={`p-1.5 text-[11px] font-semibold rounded-lg border ${
+                        className={`min-h-[44px] py-1.5 px-2 text-[11px] font-semibold rounded-lg border transition-all ${
                           paymentMethod === 'orange_money'
-                            ? 'bg-amber-600 text-white'
-                            : 'bg-slate-50 text-slate-700 border-slate-200'
+                            ? 'bg-amber-600 text-white border-amber-600 shadow-xs'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 active:bg-slate-100'
                         }`}
                       >
                         Orange Money
@@ -583,7 +601,7 @@ export const PublicStorefront: React.FC<PublicStorefrontProps> = ({
                       placeholder="Ex: Sonner à l’interphone Diop"
                       value={orderNotes}
                       onChange={(e) => setOrderNotes(e.target.value)}
-                      className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300"
+                      className="w-full min-h-[42px] px-3 py-2 text-xs rounded-lg border border-slate-300"
                     />
                   </div>
                 </form>

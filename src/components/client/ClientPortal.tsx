@@ -114,38 +114,38 @@ export const ClientPortal: React.FC<ClientPortalProps> = ({ onOpenStore }) => {
         {/* Tab Bar */}
         <div className="border-t border-slate-100 bg-slate-50/60">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-2 overflow-x-auto py-2 text-xs font-medium">
+            <div className="flex items-center gap-2 overflow-x-auto py-2 text-xs font-medium no-scrollbar">
               <button
                 onClick={() => setActiveTab('orders')}
-                className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
                   activeTab === 'orders'
                     ? 'bg-emerald-700 text-white font-semibold shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-slate-600 hover:text-slate-900 active:bg-slate-200/50'
                 }`}
               >
-                <ShoppingBag className="w-3.5 h-3.5" />
+                <ShoppingBag className="w-4 h-4" />
                 <span>Mes Commandes ({orders.length})</span>
               </button>
               <button
                 onClick={() => setActiveTab('stores')}
-                className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
                   activeTab === 'stores'
                     ? 'bg-emerald-700 text-white font-semibold shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-slate-600 hover:text-slate-900 active:bg-slate-200/50'
                 }`}
               >
-                <Store className="w-3.5 h-3.5" />
-                <span>Boutiques & Commerces Disponibles</span>
+                <Store className="w-4 h-4" />
+                <span>Boutiques & Commerces</span>
               </button>
               <button
                 onClick={() => setActiveTab('profile')}
-                className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                className={`min-h-[40px] px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
                   activeTab === 'profile'
                     ? 'bg-emerald-700 text-white font-semibold shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-slate-600 hover:text-slate-900 active:bg-slate-200/50'
                 }`}
               >
-                <User className="w-3.5 h-3.5" />
+                <User className="w-4 h-4" />
                 <span>Mon Profil & Adresses</span>
               </button>
             </div>

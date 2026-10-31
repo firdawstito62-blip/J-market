@@ -296,6 +296,18 @@ function getInitialSeedData(): DatabaseSchema {
       lastLoginAt: '2026-10-27T08:30:00Z',
     },
     {
+      id: 'usr_super_admin_firdaws',
+      email: 'firdawstito62@gmail.com',
+      passwordHash: adminPass.hash,
+      salt: adminPass.salt,
+      fullName: 'Firdaws Administrateur',
+      phone: '+221 78 000 00 00',
+      role: 'super_admin',
+      status: 'active',
+      createdAt: '2026-01-01T00:00:00Z',
+      lastLoginAt: '2026-10-31T09:45:00Z',
+    },
+    {
       id: 'usr_admin_epicerie',
       email: 'dakar@jmarket.africa',
       passwordHash: storePass.hash,

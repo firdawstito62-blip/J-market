@@ -62,10 +62,10 @@ export const MarketplaceView: React.FC<MarketplaceViewProps> = ({ onOpenStore })
             <button
               key={type}
               onClick={() => setActivityFilter(type)}
-              className={`px-3 py-1.5 text-xs rounded-lg whitespace-nowrap shrink-0 transition-colors ${
+              className={`min-h-[40px] px-3.5 py-2 text-xs rounded-lg whitespace-nowrap shrink-0 transition-colors flex items-center ${
                 activityFilter === type
-                  ? 'bg-emerald-700 text-white font-semibold'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  ? 'bg-emerald-700 text-white font-semibold shadow-xs'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 active:bg-slate-300'
               }`}
             >
               {type === 'all'
@@ -75,20 +75,20 @@ export const MarketplaceView: React.FC<MarketplaceViewProps> = ({ onOpenStore })
                 : type === 'restaurant'
                 ? 'Restaurants'
                 : type === 'boutique'
-                ? 'Boutiques Mode & Déco'
+                ? 'Boutiques Mode'
                 : 'Supérettes'}
             </button>
           ))}
         </div>
 
         <div className="relative w-full sm:w-72">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
           <input
             type="text"
             placeholder="Rechercher par nom, ville..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+            className="w-full min-h-[44px] pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-600 bg-white"
           />
         </div>
       </div>
@@ -161,10 +161,10 @@ export const MarketplaceView: React.FC<MarketplaceViewProps> = ({ onOpenStore })
               <div className="p-5 pt-0">
                 <button
                   onClick={() => onOpenStore(s.slug)}
-                  className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors shadow-xs"
+                  className="w-full min-h-[44px] py-2.5 bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-semibold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs"
                 >
                   <span>Consulter le catalogue</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </div>

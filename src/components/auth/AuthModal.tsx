@@ -214,21 +214,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
       <div className="relative w-full max-w-xl bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden my-8">
         {/* Header Tabs */}
-        <div className="flex items-center justify-between border-b border-slate-200 px-6 pt-5 pb-3">
+        <div className="flex items-center justify-between border-b border-slate-200 px-4 sm:px-6 pt-4 sm:pt-5 pb-3">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-md bg-emerald-700 flex items-center justify-center text-white font-bold text-sm">
               J
             </div>
-            <h2 className="text-lg font-bold text-slate-900">
+            <h2 className="text-base sm:text-lg font-bold text-slate-900 truncate">
               {tab === 'login' && 'Connexion à J-Market'}
-              {tab === 'register_company' && 'Créer mon compte professionnel'}
-              {tab === 'register_client' && 'Créer mon compte client'}
-              {tab === 'forgot_password' && 'Récupération du mot de passe'}
+              {tab === 'register_company' && 'Créer un compte professionnel'}
+              {tab === 'register_client' && 'Créer un compte client'}
+              {tab === 'forgot_password' && 'Récupérer mot de passe'}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 p-1 rounded-md"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center text-slate-400 hover:text-slate-600 active:bg-slate-100 rounded-lg -mr-2"
           >
             <X className="w-5 h-5" />
           </button>
@@ -238,37 +238,40 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         <div className="flex border-b border-slate-100 bg-slate-50 text-xs font-medium text-slate-600">
           <button
             onClick={() => { setTab('login'); setError(null); }}
-            className={`flex-1 py-3 text-center transition-colors border-b-2 ${
+            className={`flex-1 min-h-[44px] py-3 text-center transition-colors border-b-2 flex items-center justify-center ${
               tab === 'login'
                 ? 'border-emerald-700 text-emerald-800 bg-white font-semibold'
-                : 'border-transparent hover:text-slate-900'
+                : 'border-transparent hover:text-slate-900 active:bg-slate-100'
             }`}
           >
-            Se connecter
+            <span className="hidden sm:inline">Se connecter</span>
+            <span className="sm:hidden">Connexion</span>
           </button>
           <button
             onClick={() => { setTab('register_company'); setError(null); }}
-            className={`flex-1 py-3 text-center transition-colors border-b-2 ${
+            className={`flex-1 min-h-[44px] py-3 text-center transition-colors border-b-2 flex items-center justify-center ${
               tab === 'register_company'
                 ? 'border-emerald-700 text-emerald-800 bg-white font-semibold'
-                : 'border-transparent hover:text-slate-900'
+                : 'border-transparent hover:text-slate-900 active:bg-slate-100'
             }`}
           >
-            Compte Professionnel
+            <span className="hidden sm:inline">Compte Professionnel</span>
+            <span className="sm:hidden">Entreprise</span>
           </button>
           <button
             onClick={() => { setTab('register_client'); setError(null); }}
-            className={`flex-1 py-3 text-center transition-colors border-b-2 ${
+            className={`flex-1 min-h-[44px] py-3 text-center transition-colors border-b-2 flex items-center justify-center ${
               tab === 'register_client'
                 ? 'border-emerald-700 text-emerald-800 bg-white font-semibold'
-                : 'border-transparent hover:text-slate-900'
+                : 'border-transparent hover:text-slate-900 active:bg-slate-100'
             }`}
           >
-            Compte Client
+            <span className="hidden sm:inline">Compte Client</span>
+            <span className="sm:hidden">Client</span>
           </button>
         </div>
 
-        <div className="p-6 max-h-[75vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 max-h-[75vh] overflow-y-auto">
           {error && (
             <div className="mb-4 flex items-start gap-2.5 p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 text-xs">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
